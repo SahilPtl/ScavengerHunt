@@ -1,0 +1,24 @@
+The above error occurred in the <Controller> component:
+
+    at Controller (https://3990420d-61f6-4f0f-b0f4-34009f1ea32a-00-kdp4h773e0g3.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-YABUFNLM.js?v=d629824c:313:35)
+    at FormField (https://3990420d-61f6-4f0f-b0f4-34009f1ea32a-00-kdp4h773e0g3.spock.replit.dev/src/components/ui/form.tsx:32:6)
+    at div
+    at _c9 (https://3990420d-61f6-4f0f-b0f4-34009f1ea32a-00-kdp4h773e0g3.spock.replit.dev/src/components/ui/card.tsx:114:12)
+    at div
+    at _c (https://3990420d-61f6-4f0f-b0f4-34009f1ea32a-00-kdp4h773e0g3.spock.replit.dev/src/components/ui/card.tsx:20:11)
+    at form
+    at FormProvider (https://3990420d-61f6-4f0f-b0f4-34009f1ea32a-00-kdp4h773e0g3.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-YABUFNLM.js?v=d629824c:102:11)
+    at div
+    at div
+    at div
+    at ShareHunt (https://3990420d-61f6-4f0f-b0f4-34009f1ea32a-00-kdp4h773e0g3.spock.replit.dev/src/pages/share-hunt.tsx:45:18)
+    at Route (https://3990420d-61f6-4f0f-b0f4-34009f1ea32a-00-kdp4h773e0g3.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=d629824c:323:16)
+    at ProtectedRoute (https://3990420d-61f6-4f0f-b0f4-34009f1ea32a-00-kdp4h773e0g3.spock.replit.dev/src/lib/protected-route.tsx:22:3)
+    at Switch (https://3990420d-61f6-4f0f-b0f4-34009f1ea32a-00-kdp4h773e0g3.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=d629824c:379:17)
+    at Router
+    at AuthProvider (https://3990420d-61f6-4f0f-b0f4-34009f1ea32a-00-kdp4h773e0g3.spock.replit.dev/src/hooks/use-auth.tsx:26:32)
+    at QueryClientProvider (https://3990420d-61f6-4f0f-b0f4-34009f1ea32a-00-kdp4h773e0g3.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=d629824c:2805:3)
+    at App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
