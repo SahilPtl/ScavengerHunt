@@ -12,7 +12,9 @@ cd 'C:\Users\sahil\OneDrive\Documents\Projects\ScavengerHunt'
 npm run demo
 ```
 
-Open **http://127.0.0.1:3001**. This laptop has a dedicated PostgreSQL 17 cluster at `.local/postgres`, database `scavenger_hunt`, role `hunt_app`, port `55432`. Its random password is already stored only in ignored local files. The installed PostgreSQL services were not modified. **Do not replace the working `server/.env` with the example.**
+Open **http://localhost:3001**. Use this address consistently for Google login. This laptop has a dedicated PostgreSQL 17 cluster at `.local/postgres`, database `scavenger_hunt`, role `hunt_app`, port `55432`. Its random password and Google credentials are already stored only in ignored local files. The installed PostgreSQL services were not modified. **Do not replace the working `server/.env` with the example.**
+
+For the next session, open this existing folder in VS Code, choose **Terminal → New Terminal**, and run `npm run demo` from the project root. It starts the dedicated database, applies the schema/seeds, builds the frontend and serves the app. Keep the terminal running. You do not need to reinstall PostgreSQL or reconfigure Google. See [START_HERE.md](START_HERE.md) for the short checklist and recovery steps.
 
 Windows reserves the common ports 5000 and 5173 on this laptop. This project uses **3001** for the API and built UI, **3002** for Vite development, and **3003** for a separately configured safe preview.
 
@@ -247,7 +249,7 @@ Speed reward is `max(0, 50 - floor(secondsSincePreviousCompletion / 6))`, measur
 
 The game polls own progress, leaderboard and players every 2.5 seconds after the previous poll finishes; it aborts requests and clears its timeout on unmount. About 1.2 read requests/second/player is appropriate for a laptop, not a large public event. Mutations remain REST. No WebSockets/SSE/Redis/Kafka.
 
-`POST /api/ai/generate-clue` calls the OpenAI Responses API only on the server with a 3.5-second timeout. Empty/blank keys, 401, 429, provider failures, network errors, malformed/answer-revealing output all return the stored clue labeled **Prepared clue**. The successful path returns **AI-generated draft**. No normal join or checkpoint request calls OpenAI. Valid-key live generation remains unverified without credentials. Optional Google login is implemented on this side branch; email/password remains fully functional. See [Google login setup and verification](docs/GOOGLE_LOGIN.md).
+`POST /api/ai/generate-clue` calls the OpenAI Responses API only on the server with a 3.5-second timeout. Empty/blank keys, 401, 429, provider failures, network errors, malformed/answer-revealing output all return the stored clue labeled **Prepared clue**. The successful path returns **AI-generated draft**. No normal join or checkpoint request calls OpenAI. Valid-key live generation remains unverified without credentials. Optional Google login is included in main; email/password remains fully functional. See [Google login setup and verification](docs/GOOGLE_LOGIN.md).
 
 ## Tests and screenshots
 

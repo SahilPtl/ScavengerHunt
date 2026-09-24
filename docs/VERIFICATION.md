@@ -42,6 +42,6 @@ No live valid-key OpenAI call, WSL runtime, surveyed campus navigation or public
 
 The app uses an original offline schematic by default, so offline map rendering does not depend on downloading tiles. Dependencies must first be installed online. Screenshots are visual inspection aids, not replacements for the executed database/API/browser checks.
 
-## Google login side branch
+## Google login
 
-22 tests now pass, including 9 additional Google configuration/flow checks with controlled provider transport. GitHub Actions passed for the implementation commit. A separate live browser test with the replacement Google client completed account selection and sign-in, returned to the authenticated app, joined the hunt as Google Login Demo, completed checkpoint one for 147 points, and retained the session and progress after reload. The registered callback is http://localhost:3001/api/auth/google/callback. Credentials remain only in ignored local configuration. See GOOGLE_LOGIN.md. Main remains unchanged.
+22 tests now pass, including 9 additional Google configuration/flow checks with controlled provider transport. GitHub Actions passed for the implementation commit. A separate live browser test with the replacement Google client completed account selection and sign-in, returned to the authenticated app, joined the hunt as Google Login Demo, completed checkpoint one for 147 points, and retained the session and progress after reload. The registered callback is http://localhost:3001/api/auth/google/callback. Credentials remain only in ignored local configuration. See GOOGLE_LOGIN.md. The verified feature was subsequently merged into main at the user's request.

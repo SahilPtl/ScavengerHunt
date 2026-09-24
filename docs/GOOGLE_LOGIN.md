@@ -1,6 +1,6 @@
-# Optional Google login — feature/google-login
+# Optional Google login
 
-The same complete multiplayer demo remains available with email/password and no Google credentials. Google login requires internet and valid Google Cloud configuration; it is not an offline login replacement. This work is on a side branch; main is not changed.
+The same complete multiplayer demo remains available with email/password and no Google credentials. Google login requires internet and valid Google Cloud configuration; it is not an offline login replacement. Developed and verified on `feature/google-login`, this feature is now included in `main`.
 
 ## Local configuration
 

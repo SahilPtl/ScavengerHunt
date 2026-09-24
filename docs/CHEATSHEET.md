@@ -4,7 +4,7 @@
 
 **Root:** `C:\Users\sahil\OneDrive\Documents\Projects\ScavengerHunt`
 
-**Start tomorrow:** `npm run demo` → **http://127.0.0.1:3001**. Database already configured: PostgreSQL 17, `scavenger_hunt`, `hunt_app`, `127.0.0.1:55432`, `.local/postgres`. Keep `server/.env` private. No OpenAI/OAuth keys required.
+**Start tomorrow:** `npm run demo` → **http://localhost:3001**. Database already configured: PostgreSQL 17, `scavenger_hunt`, `hunt_app`, `127.0.0.1:55432`, `.local/postgres`. Keep `server/.env` private. No OpenAI/OAuth keys required.
 
 **Two logins:** `demo@mnnit.com` / `demo123`; `player2@mnnit.com` / `demo123`. Use independently created tabs or two browsers. Do not duplicate a logged-in tab.
 
