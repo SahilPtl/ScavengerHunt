@@ -38,10 +38,10 @@ Executed on 25 September 2026 (Asia/Kolkata), Windows, Node 20.16.0 and PostgreS
 
 ## Boundaries
 
-No live valid-key OpenAI call, successful real Google OAuth callback, WSL runtime, surveyed campus navigation or public production deployment is claimed. Cloudflared was absent, so public tunnel execution remains unverified. The OpenAI provider failure tests use controlled fake transport responses, not a real paid provider outage. No physical GPS walk was performed. Browser fallback behavior was real; exact provider permission-denial versus unavailable-location cause is not distinguished by the friendly UI message.
+No live valid-key OpenAI call, WSL runtime, surveyed campus navigation or public production deployment is claimed. Google login was subsequently verified on the side branch as described below. Cloudflared was absent, so public tunnel execution remains unverified. The OpenAI provider failure tests use controlled fake transport responses, not a real paid provider outage. No physical GPS walk was performed. Browser fallback behavior was real; exact provider permission-denial versus unavailable-location cause is not distinguished by the friendly UI message.
 
 The app uses an original offline schematic by default, so offline map rendering does not depend on downloading tiles. Dependencies must first be installed online. Screenshots are visual inspection aids, not replacements for the executed database/API/browser checks.
 
 ## Google login side branch
 
-22 tests now pass, including 9 additional Google configuration/flow checks with controlled provider transport. The live Google authorization request reached Google and returned redirect_uri_mismatch because the supplied client has not registered this application's callback. See GOOGLE_LOGIN.md. Main remains unchanged.
+22 tests now pass, including 9 additional Google configuration/flow checks with controlled provider transport. GitHub Actions passed for the implementation commit. A separate live browser test with the replacement Google client completed account selection and sign-in, returned to the authenticated app, joined the hunt as Google Login Demo, completed checkpoint one for 147 points, and retained the session and progress after reload. The registered callback is http://localhost:3001/api/auth/google/callback. Credentials remain only in ignored local configuration. See GOOGLE_LOGIN.md. Main remains unchanged.

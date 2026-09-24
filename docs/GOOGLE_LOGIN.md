@@ -14,7 +14,9 @@ GOOGLE_CALLBACK_URL=http://localhost:3001/api/auth/google/callback
 
 Set all three to enable Google sign-in. Blank/missing/incomplete settings hide the button and disable its flow endpoints. A production callback must use HTTPS. The local demo and password authentication keep working either way.
 
-In Google Cloud Console, select the supplied client and add the exact callback above under **Authorized redirect URIs**, preserving existing entries. The supplied client initially registered only `http://localhost:15001/api/auth/google/callback`, which is a separate application. Google rejects unregistered callback URLs with `redirect_uri_mismatch`. Do not move Scavenger Hunt onto the other application's port.
+In Google Cloud Console, select your web client and add the exact callback above under **Authorized redirect URIs**, preserving existing entries. The replacement client supplied for this local installation is configured with this callback. Google rejects unregistered callback URLs with `redirect_uri_mismatch`; its value must match the server setting exactly.
+
+The Google consent screen currently uses the existing project's name, `sql playground 1`. This is project-wide branding, independent of this application's login button or the individual web client's name.
 
 The server redirect flow does not need a JavaScript origin entry. Request only `openid email profile`. If Google marks the app as Testing, the participating Google accounts may need to be listed as test users. Do not publish the consent screen or add broader API permissions merely to run this demo.
 
@@ -43,7 +45,7 @@ Start with `npm run demo`, open **http://localhost:3001/login**, then **Sign in 
 
 `npm test` now runs 22 checks, covering the original real PostgreSQL multiplayer suite plus optional configuration, PKCE, cookie flags, missing/mismatched/Unicode state, expired/consumed attempts, cancellation, provider failure, nonce, verified-email requirement, account-collision rejection, persistent Google identity and one-use session tickets. Google transport is controlled in these integration tests; they are not evidence of a successful real Google account login.
 
-The real browser displayed the Google button and reached Google's authorization server. Google returned **400 redirect_uri_mismatch** with the initial supplied client configuration. A live successful callback remains unverified until its Cloud Console callback is saved and a Google account completes sign-in. The rest of the app and local demo remain functional.
+On 25 September 2026, the replacement credentials and registered localhost callback passed a real Google account sign-in in the browser. Google returned to the authenticated application. That session joined the hunt as `Google Login Demo`, used Demo Location Mode, completed the first checkpoint for 147 points, and retained its login, score and checkpoint progress after a reload. The original redirect mismatch is resolved for this local configuration. The branch's GitHub Actions checks also passed.
 
 ## Production and interview notes
 
