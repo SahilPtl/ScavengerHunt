@@ -1,1 +1,15 @@
-{"name":"mnnit-scavenger-hunt","private":true,"scripts":{"demo":"node scripts/demo.mjs","stop":"node scripts/stop.mjs","db:setup":"npm --prefix server run db:setup","db:reset":"npm --prefix server run db:reset","test":"npm --prefix server test","build":"npm --prefix client run build"}}
+{
+  "name": "mnnit-scavenger-hunt",
+  "private": true,
+  "scripts": {
+    "demo": "node scripts/demo.mjs",
+    "stop": "node scripts/stop.mjs",
+    "db:setup": "npm --prefix server run db:setup",
+    "db:reset": "npm --prefix server run db:reset",
+    "test": "npm --prefix server test",
+    "build": "npm --prefix client run build"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.9"
+  }
+}
