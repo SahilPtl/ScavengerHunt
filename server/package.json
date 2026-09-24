@@ -8,7 +8,7 @@
     "start": "node server.js",
     "db:setup": "node database/setup.js",
     "db:reset": "node database/reset.js",
-    "test": "node --test tests/game.test.js"
+    "test": "node --test --test-concurrency=1 tests/game.test.js tests/google.test.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -16,6 +16,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.2",
     "express-rate-limit": "^7.5.0",
+    "google-auth-library": "^10.9.1",
     "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.13.1"

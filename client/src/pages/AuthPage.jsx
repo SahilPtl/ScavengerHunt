@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowRight, MapPin, Route, Users } from "lucide-react";
 import { api } from "../services/api";
 import { useAuth } from "../hooks/useAuth";
@@ -8,6 +8,22 @@ export default function AuthPage({ register = false }) {
     navigate = useNavigate();
   const [error, setError] = useState(""),
     [busy, setBusy] = useState(false);
+  const [google, setGoogle] = useState(null),
+    [params] = useSearchParams();
+  useEffect(() => {
+    api("/auth/google/config")
+      .then(setGoogle)
+      .catch(() => setGoogle(null));
+  }, []);
+  const googleError = {
+    cancelled: "Google sign-in was cancelled. Try again or use email/password.",
+    expired:
+      "Google sign-in expired or could not be verified. Please try again.",
+    failed:
+      "Google sign-in could not finish. Check your connection and try again, or use email/password.",
+    existing_account:
+      "This email already has a password account. Sign in with your existing password; accounts are not linked automatically.",
+  }[params.get("google_error")];
   if (user) return <Navigate to="/" replace />;
   async function submit(e) {
     e.preventDefault();
@@ -74,6 +90,42 @@ export default function AuthPage({ register = false }) {
             ? "Create your account and find your team."
             : "Your next discovery is just a clue away."}
         </p>
+        {googleError && (
+          <p className="error" role="alert">
+            {googleError}
+          </p>
+        )}
+        {google?.enabled && (
+          <>
+            <a className="secondary full google-login" href={google.startUrl}>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  fill="#4285F4"
+                  d="M21.6 12.2c0-.7-.1-1.4-.2-2.2H12v4.2h5.4a4.6 4.6 0 0 1-2 3v2.6h3.3c1.9-1.8 2.9-4.4 2.9-7.6Z"
+                />
+                <path
+                  fill="#34A853"
+                  d="M12 22c2.7 0 5-.9 6.7-2.4l-3.3-2.6c-.9.6-2.1.9-3.4.9-2.6 0-4.8-1.7-5.6-4H3v2.7A10 10 0 0 0 12 22Z"
+                />
+                <path
+                  fill="#FBBC05"
+                  d="M6.4 13.9a6 6 0 0 1 0-3.8V7.4H3a10 10 0 0 0 0 9.2l3.4-2.7Z"
+                />
+                <path
+                  fill="#EA4335"
+                  d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.9-2.9A9.6 9.6 0 0 0 12 2a10 10 0 0 0-9 5.4l3.4 2.7c.8-2.3 3-4 5.6-4Z"
+                />
+              </svg>
+              Sign in with Google
+            </a>
+            <p className="auth-switch">or continue with email</p>
+          </>
+        )}
         <form onSubmit={submit}>
           {register && (
             <label>

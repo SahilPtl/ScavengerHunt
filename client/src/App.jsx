@@ -5,6 +5,7 @@ import AuthPage from "./pages/AuthPage";
 import DashboardPage from "./pages/DashboardPage";
 import GamePage from "./pages/GamePage";
 import LeaderboardPage from "./pages/LeaderboardPage";
+import GoogleCompletePage from "./pages/GoogleCompletePage";
 function Protected({ children }) {
   const { user, loading } = useAuth();
   if (loading) return <main className="page">Loading your adventure…</main>;
@@ -18,6 +19,10 @@ export default function App() {
           <Routes>
             <Route path="/login" element={<AuthPage />} />
             <Route path="/register" element={<AuthPage register />} />
+            <Route
+              path="/auth/google/complete"
+              element={<GoogleCompletePage />}
+            />
             <Route
               path="/"
               element={

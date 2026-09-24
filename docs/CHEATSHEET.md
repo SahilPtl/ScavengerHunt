@@ -24,4 +24,4 @@
 
 **Recovery:** Keep installed dependencies and `.local` intact; use offline schematic + demo mode + prepared clues. No Wi-Fi required after installation. Database error → check 55432 and `.env`; occupied port → stop/restart; expired token → login; GPS denied → demo switch. Ports 5000/5173 are reserved on this laptop.
 
-**Limits to disclose:** no verified live OpenAI success, no OAuth, illustrative geography, no anti-cheat, no public production deployment. Public mode disables seeded accounts and demo routes. Full details: `docs/INTERVIEW_GUIDE.md`, `docs/DEPLOYMENT.md`, `docs/VERIFICATION.md`.
+**Limits to disclose:** no verified live OpenAI success; optional Google login needs a registered callback (see GOOGLE_LOGIN.md); illustrative geography, no anti-cheat, no public production deployment. Public mode disables seeded accounts and demo routes. Full details: `docs/INTERVIEW_GUIDE.md`, `docs/DEPLOYMENT.md`, `docs/VERIFICATION.md`.

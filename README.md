@@ -247,7 +247,7 @@ Speed reward is `max(0, 50 - floor(secondsSincePreviousCompletion / 6))`, measur
 
 The game polls own progress, leaderboard and players every 2.5 seconds after the previous poll finishes; it aborts requests and clears its timeout on unmount. About 1.2 read requests/second/player is appropriate for a laptop, not a large public event. Mutations remain REST. No WebSockets/SSE/Redis/Kafka.
 
-`POST /api/ai/generate-clue` calls the OpenAI Responses API only on the server with a 3.5-second timeout. Empty/blank keys, 401, 429, provider failures, network errors, malformed/answer-revealing output all return the stored clue labeled **Prepared clue**. The successful path returns **AI-generated draft**. No normal join or checkpoint request calls OpenAI. Valid-key live generation remains unverified without credentials. OAuth is intentionally not implemented because local email/password is the primary resume-matched path.
+`POST /api/ai/generate-clue` calls the OpenAI Responses API only on the server with a 3.5-second timeout. Empty/blank keys, 401, 429, provider failures, network errors, malformed/answer-revealing output all return the stored clue labeled **Prepared clue**. The successful path returns **AI-generated draft**. No normal join or checkpoint request calls OpenAI. Valid-key live generation remains unverified without credentials. Optional Google login is implemented on this side branch; email/password remains fully functional. See [Google login setup and verification](docs/GOOGLE_LOGIN.md).
 
 ## Tests and screenshots
 

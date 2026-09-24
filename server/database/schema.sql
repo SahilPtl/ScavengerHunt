@@ -33,3 +33,14 @@ CREATE TABLE IF NOT EXISTS player_locations (
  mode TEXT NOT NULL CHECK(mode IN ('gps','demo')), updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS leaderboard_hunt_score ON hunt_participants(hunt_id,score DESC);
+-- Additive migration: existing password accounts and runs remain unchanged.
+ALTER TABLE users ADD COLUMN IF NOT EXISTS google_sub TEXT UNIQUE;
+ALTER TABLE users ALTER COLUMN password_hash DROP NOT NULL;
+CREATE TABLE IF NOT EXISTS oauth_attempts (
+ state_hash TEXT PRIMARY KEY, nonce TEXT NOT NULL, verifier TEXT NOT NULL,
+ expires_at TIMESTAMPTZ NOT NULL DEFAULT now()+interval '10 minutes'
+);
+CREATE TABLE IF NOT EXISTS oauth_tickets (
+ ticket_hash TEXT PRIMARY KEY, user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+ expires_at TIMESTAMPTZ NOT NULL DEFAULT now()+interval '1 minute'
+);

@@ -29,3 +29,28 @@ export const config = {
     "postgresql://postgres@127.0.0.1:5432/scavenger_hunt",
   origin: process.env.CLIENT_ORIGIN || "http://localhost:3002",
 };
+export function googleSettings(env = process.env) {
+  const clientId = env.GOOGLE_CLIENT_ID?.trim();
+  const clientSecret = env.GOOGLE_CLIENT_SECRET?.trim();
+  const callback = env.GOOGLE_CALLBACK_URL?.trim();
+  try {
+    const url = new URL(callback);
+    const local = ["localhost", "127.0.0.1"].includes(url.hostname);
+    if (
+      !clientId ||
+      !clientSecret ||
+      url.pathname !== "/api/auth/google/callback" ||
+      url.search ||
+      url.hash ||
+      url.username ||
+      url.password ||
+      (url.protocol !== "https:" &&
+        !(url.protocol === "http:" && local && env.NODE_ENV !== "production"))
+    )
+      return null;
+    return { clientId, clientSecret, callback: url.href, origin: url.origin };
+  } catch {
+    return null;
+  }
+}
+export const google = googleSettings();

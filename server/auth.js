@@ -5,6 +5,8 @@ import rateLimit from "express-rate-limit";
 import { pool } from "./database/db.js";
 import { config } from "./config.js";
 import { fail, wrap, ok } from "./utils.js";
+import { session } from "./session.js";
+import { createGoogleRouter } from "./google.js";
 export const auth = wrap(async (req, res, next) => {
   let payload;
   try {
@@ -67,16 +69,7 @@ function credentials(body) {
     throw fail(400, "Enter a valid email and password (6–72 bytes)");
   return { email, password };
 }
-function session(user) {
-  return {
-    token: jwt.sign({}, config.secret, {
-      subject: String(user.id),
-      issuer: "campus-hunt",
-      expiresIn: "8h",
-    }),
-    user: { id: user.id, name: user.name, role: user.role },
-  };
-}
+router.use("/google", createGoogleRouter());
 router.post(
   "/register",
   wrap(async (req, res) => {
@@ -103,6 +96,7 @@ router.post(
     } = await pool.query("SELECT * FROM users WHERE email=$1", [email]);
     if (
       !user ||
+      !user.password_hash ||
       user.simulated ||
       (!config.demo && user.demo_account) ||
       !(await bcrypt.compare(password, user.password_hash))
