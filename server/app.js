@@ -7,7 +7,7 @@ import { config, root } from "./config.js";
 import { pool } from "./database/db.js";
 import authRoutes from "./auth.js";
 import routes from "./routes.js";
-import { ok, wrap } from "./utils.js";
+import { ok, wrap, fail } from "./utils.js";
 export const app = express();
 app.disable("x-powered-by");
 app.use(
@@ -24,6 +24,15 @@ app.use(
 );
 app.use(cors({ origin: config.origin }));
 app.use(express.json({ limit: "16kb" }));
+app.use((req, res, next) => {
+  if (
+    ["POST", "PATCH"].includes(req.method) &&
+    (!req.body || typeof req.body !== "object" || Array.isArray(req.body))
+  ) {
+    return next(fail(400, "Request body must be a JSON object"));
+  }
+  next();
+});
 app.use(
   "/api",
   rateLimit({
@@ -58,17 +67,15 @@ app.use((err, req, res, next) => {
       : err.type === "entity.parse.failed"
         ? 400
         : 503);
-  res
-    .status(status)
-    .json({
-      success: false,
-      message:
-        err.code === "23505"
-          ? "This email is already registered"
-          : err.status
-            ? err.message
-            : status === 400
-              ? "Invalid JSON request"
-              : "Service unavailable. Check PostgreSQL and try again.",
-    });
+  res.status(status).json({
+    success: false,
+    message:
+      err.code === "23505"
+        ? "This email is already registered"
+        : err.status
+          ? err.message
+          : status === 400
+            ? "Invalid JSON request"
+            : "Service unavailable. Check PostgreSQL and try again.",
+  });
 });

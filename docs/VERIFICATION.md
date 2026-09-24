@@ -7,7 +7,7 @@ Executed on 25 September 2026 (Asia/Kolkata), Windows, Node 20.16.0 and PostgreS
 - Client/server npm installs and lockfiles. Backend audit: zero vulnerabilities; client upgraded to React Router 7.18.4 after an advisory, then zero vulnerabilities.
 - Idempotent schema and prepared clue seeds applied repeatedly without destroying real progress.
 - Root `npm run demo` initialized DB state, built React, started API and served the real UI at port 3001.
-- `npm test`: **12 passing checks**, including nine nested real PostgreSQL/HTTP lifecycle checks; no skipped tests.
+- `npm test`: **13 passing checks**, including ten nested real PostgreSQL/HTTP lifecycle checks; no skipped tests.
 - Authentication, bcrypt hashing, duplicate email, invalid login/JWT and unauthenticated rejection.
 - Two independently authenticated players; idempotent joins; missing hunt; invalid coordinates; wrong checkpoint order; too-distant coordinates.
 - Supplied other-user IDs did not change the second user's run/location; non-organizers could not draft clues or simulate opponents.

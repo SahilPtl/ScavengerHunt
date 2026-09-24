@@ -6,21 +6,22 @@ import { pool } from "./database/db.js";
 import { config } from "./config.js";
 import { fail, wrap, ok } from "./utils.js";
 export const auth = wrap(async (req, res, next) => {
+  let payload;
   try {
-    const payload = jwt.verify(
+    payload = jwt.verify(
       req.headers.authorization?.replace(/^Bearer /, ""),
       config.secret,
       { algorithms: ["HS256"], issuer: "campus-hunt" },
     );
-    req.user = (
-      await pool.query(
-        "SELECT id,name,role,simulated,demo_account FROM users WHERE id=$1",
-        [payload.sub],
-      )
-    ).rows[0];
   } catch {
     throw fail(401, "Please log in again");
   }
+  req.user = (
+    await pool.query(
+      "SELECT id,name,role,simulated,demo_account FROM users WHERE id=$1",
+      [payload.sub],
+    )
+  ).rows[0];
   if (
     !req.user ||
     req.user.simulated ||
@@ -52,7 +53,8 @@ router.use(
   }),
 );
 function credentials(body) {
-  const email = body.email?.trim().toLowerCase(),
+  const email =
+      typeof body.email === "string" ? body.email.trim().toLowerCase() : "",
     password = body.password;
   if (
     !email ||
@@ -79,7 +81,7 @@ router.post(
   "/register",
   wrap(async (req, res) => {
     const { email, password } = credentials(req.body);
-    const name = req.body.name?.trim();
+    const name = typeof req.body.name === "string" ? req.body.name.trim() : "";
     if (!name || name.length > 60)
       throw fail(400, "Name must contain 1–60 characters");
     const {

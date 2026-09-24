@@ -34,7 +34,8 @@ r.get(
 r.post(
   "/hunts/:id/join",
   wrap(async (req, res) => {
-    const name = (req.body.teamName || req.user.name)?.trim();
+    const rawName = req.body.teamName ?? req.user.name;
+    const name = typeof rawName === "string" ? rawName.trim() : "";
     if (!name || name.length > 60)
       throw fail(400, "Team name must contain 1–60 characters");
     const h = (

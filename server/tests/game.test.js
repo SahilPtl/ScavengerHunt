@@ -128,6 +128,35 @@ test("Real PostgreSQL and HTTP lifecycle, authorization, concurrency, persistenc
     }
     const [a, b] = accounts;
     await t.test(
+      "wrong JSON types receive readable validation errors",
+      async () => {
+        assert.equal(
+          (
+            await post("/auth/login", null, {
+              email: 123,
+              password: "Verify123!",
+            })
+          ).status,
+          400,
+        );
+        assert.equal(
+          (
+            await post("/auth/register", null, {
+              name: 123,
+              email: "invalid-types@example.test",
+              password: "Verify123!",
+            })
+          ).status,
+          400,
+        );
+        assert.equal(
+          (await post("/hunts/1/join", a.token, { teamName: 123 })).status,
+          400,
+        );
+        assert.equal((await post("/hunts/1/join", a.token, [])).status, 400);
+      },
+    );
+    await t.test(
       "registration, bcrypt login, duplicate email and bad credentials",
       async () => {
         assert.equal(
