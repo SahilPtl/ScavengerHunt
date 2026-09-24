@@ -7,7 +7,9 @@ const server = app.listen(config.port, config.host, () =>
   ),
 );
 server.on("error", (error) => {
-  console.error(`Cannot listen on ${config.host}:${config.port} (${error.code}). Check whether the port is occupied or reserved.`);
+  console.error(
+    `Cannot listen on ${config.host}:${config.port} (${error.code}). Check whether the port is occupied or reserved.`,
+  );
   pool.end().finally(() => process.exit(1));
 });
 for (const signal of ["SIGINT", "SIGTERM"])

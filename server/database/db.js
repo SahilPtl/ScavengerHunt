@@ -5,7 +5,11 @@ export const pool = new pg.Pool({
   max: 10,
   connectionTimeoutMillis: 4000,
 });
-pool.on("error", () => console.error("PostgreSQL connection lost; readiness checks will report unavailable."));
+pool.on("error", () =>
+  console.error(
+    "PostgreSQL connection lost; readiness checks will report unavailable.",
+  ),
+);
 export async function transaction(work) {
   const client = await pool.connect();
   try {
